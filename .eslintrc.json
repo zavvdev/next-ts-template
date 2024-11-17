@@ -1,0 +1,134 @@
+{
+  "extends": [
+    "next",
+    "prettier",
+    "plugin:unicorn/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["folders", "@typescript-eslint"],
+  "rules": {
+    "no-console": "error",
+    "import/no-cycle": "error",
+    "unicorn/no-null": "off",
+    "unicorn/no-useless-undefined": "off",
+    "folders/match-regex": [
+      2,
+      "^(_)?(\\D)([[)(\\(\\.)*([a-z-\\d][\\.\\)\\[\\]\\/]*)+$",
+      "/src/"
+    ],
+    "unicorn/filename-case": [
+      "error",
+      {
+        "case": "kebabCase"
+      }
+    ],
+    "sort-imports": [
+      "error",
+      {
+        "ignoreCase": true,
+        "ignoreDeclarationSort": true
+      }
+    ],
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "type", "internal"],
+        "pathGroups": [
+          {
+            "pattern": "~/app",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "~/infra/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "~/domain/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "~/ui/**",
+            "group": "internal",
+            "position": "after"
+          }
+        ]
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "destructuredArrayIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ],
+    "import/no-restricted-paths": [
+      "error",
+      {
+        "zones": [
+          {
+            "target": "./src/domain",
+            "from": ["./src/app", "./src/ui"],
+            "message": "Dependency prohibited"
+          },
+          {
+            "target": "./src/infra",
+            "from": ["./src/app", "./src/domain", "./src/ui"],
+            "message": "Dependency prohibited"
+          },
+          {
+            "target": "./src/ui",
+            "from": ["./src/app", "./src/infra", "./src/entity"],
+            "message": "Dependency prohibited"
+          },
+          {
+            "target": "./src/entity",
+            "from": ["./src/app", "./src/infra", "./src/ui", "./src/domain"],
+            "message": "Dependency prohibited"
+          },
+          {
+            "target": "./src/ui/components/atoms",
+            "from": [
+              "./src/ui/components/molecules",
+              "./src/ui/components/organisms",
+              "./src/ui/components/templates",
+              "./src/ui/components/pages"
+            ],
+            "message": "Dependency prohibited"
+          },
+          {
+            "target": "./src/ui/components/molecules",
+            "from": [
+              "./src/ui/components/organisms",
+              "./src/ui/components/templates",
+              "./src/ui/components/pages"
+            ],
+            "message": "Dependency prohibited"
+          },
+          {
+            "target": "./src/ui/components/organisms",
+            "from": [
+              "./src/ui/components/templates",
+              "./src/ui/components/pages"
+            ],
+            "message": "Dependency prohibited"
+          },
+          {
+            "target": "./src/ui/components/templates",
+            "from": ["./src/ui/components/pages"],
+            "message": "Dependency prohibited"
+          },
+          {
+            "target": "./src/domain/utilities",
+            "from": ["./src/domain/features"],
+            "message": "Dependency prohibited"
+          }
+        ]
+      }
+    ]
+  }
+}

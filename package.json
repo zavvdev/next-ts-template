@@ -1,0 +1,38 @@
+{
+  "name": "next-ts-template",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "tsc --noEmit && next lint",
+    "prettier": "npx prettier --check .",
+    "prettify": "npx prettier --write .",
+    "analyze-deps": "knip",
+    "analyze-code": "npm run lint && npm run prettier && npm run analyze-deps",
+    "prepare": "husky",
+    "prod": "next build && next start"
+  },
+  "dependencies": {
+    "next": "14.2.4",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.9",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@typescript-eslint/eslint-plugin": "^8.0.1",
+    "@typescript-eslint/parser": "^8.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.4",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-folders": "^1.0.4",
+    "eslint-plugin-unicorn": "^54.0.0",
+    "husky": "^9.0.11",
+    "knip": "^5.30.2",
+    "prettier": "^3.3.2",
+    "typescript": "5.4.5"
+  }
+}
